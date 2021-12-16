@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Adress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h3 class="text-center">Adress Infortmation</h3>
+</div>
+<div class="container mt-5" id="adressData">
+
+</div>
+
+<script src="~/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        GetAdress()
+    })
+    function GetAdress() {
+        $.ajax({
+            url: 'http://localhost:16231/api/Adress',
+            type: 'GET',
+            success: function (data) {
+                let table = `<button id="btn-addAdress" class="btn btn-success mb-3">Add New Adress</button>
+                                 <table id="adressTable" class="table table-bordered table-hover">
+                                 <tr>
+                                    <th>#</th>
+                                    <th>Adress Title</th>
+                                    <th>City</th>
+                                    <th>Neighborhood</th>
+                                    <th>Adress Description</th>
+                                </tr>`
+                $.each(data, (key, value) => {
+                    table += `<tr> <td> ${value.id}</td>
+                                       <td> ${value.adressTitle} </td>
+                                       <td> ${value.city} </td>
+                                       <td> ${value.neighborhood} </td>
+                                       <td> ${value.adressDescription} </td>
+                                       <td> <button class="btn btn-outline-info btn-sm">Edit Adress</button>
+                                            <button onclick="deleteAdress(${value.id})" class="btn btn-outline-danger btn-sm">Delete</button> </td>
+                                       `
+                })
+                table += '</table>'
+                $('#adressData').html(table)
+            }
+        })
+    }
+
+    function deleteAdress(adressId) {
+        $.ajax({
+            url: 'http://localhost:16231/api/Adress/' + adressId,
+            type: 'DELETE',
+            success: function () {
+                alert('Adress deleted')
+            }
+        })
+    }
+</script>  

@@ -1,0 +1,126 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #myUl li {
+        cursor: pointer;
+    }
+
+    #bg-cart {
+        background-color: #fafafa;
+        box-shadow: 0 2px 8px rgb(0, 0, 0, 0.05);
+    }
+</style>
+<link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<section class="col-3" style="margin-top: 30px">
+    <div class="list-group">
+        <ul id="myUl">
+            <li href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                <b>CATEGORİES</b>
+            </li>
+            <li class="list-group-item list-group-item-action" onclick="getProducts()">All Products</li>
+
+        </ul>
+    </div>
+
+    @*<form action="/AddToCart?productName=Pizza?price=20" method="post">
+        <button>Tıkla</button>
+    </form>*@
+
+</section>
+<section class="col-9" style="margin-top:30px" id="allProducts">
+    <div class="row" id="myCard">
+    </div>
+</section>
+<section class="col-9" style="margin-top:30px" id="products-category">
+    <div class="row" id="myCard2">
+    </div>
+</section>
+<script src="~/jquery/jquery.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $('#products-category').hide()
+            getCategories()
+            getProducts()
+        })
+
+    function getCategories() {
+        $.ajax({
+            url: 'http://localhost:16231/api/Category',
+            type: 'GET',
+            success: function (data) {
+                let li = ``
+                $.each(data, (key, value) => {
+                    li += `<li onclick="getProductbyCategory(${value.id})" class="list-group-item list-group-item-action">
+                                        ${value.categoryName} </li>`
+                })
+                $('#myUl').append(li)
+            }
+        })
+    }
+
+
+    function getProducts() {
+        $.ajax({
+            url: 'http://localhost:16231/api/Product',
+            type: 'GET',
+            success: function (data) {
+                let card = ``
+                $.each(data, (key, value) => {
+                    card += `
+
+                            <div class="col-4 mb-5" id="bg-cart">
+                                  <p class="card-text text-center text-uppercase mb-3"><b> ${value.productName} </b> </p>
+                                 <img src="${value.imageUrl}" height="300" width="300" />
+                                 <p></p>
+                                 <i class="badge bg-danger"><small class="text-white text-decoration-line-through" style="font-size: 14px;"> $ ${value.price}</small></i> <i class="badge bg-success" style="margin-left: 10px;"><small class="text-white" style="font-size: 14px;"> $ ${value.discountedPrice}</small></i>
+                                 <br>
+                                   <p></p>
+                                 <div>
+                                  <button type="submit"  class="btn btn-sm btn-outline-success fa fa-shopping-cart"> Add To Cart</button>
+                                  <button type="button" class="btn btn-sm btn-outline-warning  fa fa-product-hunt" style="margin-left: 2px;"> View Product</button>
+                                </div>
+                            </div>`
+                })
+
+                $('#myCard').append(card)
+            }
+        })
+    }
+    function getProductbyCategory(categoryId) {
+        $('#allProducts').fadeOut(500)
+        $('#products-category').fadeIn(500)
+        $.ajax({
+            url: 'http://localhost:16231/api/Product/Category/' + categoryId,
+            type: 'GET',
+            success: function (data) {
+                let card = ``
+                $.each(data, (key, value) => {
+                    card += `
+
+                            <div class="col-4 mb-5" id="bg-cart">
+                                  <p class="card-text text-center text-uppercase mb-3"><b> ${value.productName} </b> </p>
+                                 <img src="${value.imageUrl}" height="300" width="300" />
+                                 <p></p>
+                                 <i class="badge bg-danger"><small class="text-white text-decoration-line-through" style="font-size: 14px;">  ${value.price}</small></i> <i class="badge bg-success" style="margin-left: 10px;"><small class="text-white" style="font-size: 14px;"> $ ${value.discountedPrice}</small></i>
+                                 <br>
+                                   <p></p>
+                                 <div>
+                                  <button type="button"  class="btn btn-sm btn-outline-success fa fa-shopping-cart"> Add To Cart</button>
+                                  <button type="button" class="btn btn-sm btn-outline-warning  fa fa-product-hunt" style="margin-left: 2px;"> View Product</button>
+                                </div>
+                            </div>`
+                })
+
+                $('#myCard2').html(card)
+            }
+        })
+    }
+
+
+</script>
+

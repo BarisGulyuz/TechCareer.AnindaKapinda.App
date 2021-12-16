@@ -1,0 +1,61 @@
+﻿<style>
+    #myNav {
+        background-color: #fafafa;
+        box-shadow: 0 2px 8px rgb(0, 0, 0, 0.3);
+    }
+
+        #myNav i {
+            cursor: pointer;
+        }
+
+    #shop-cart {
+        position: relative;
+    }
+    .cart-no {
+        position: absolute;
+        float: right;
+        min-height: 20px;
+        min-width: 20px;
+        font-size: 0.8em;
+        background-color: red;
+        color: white;
+        text-align: center;
+        top: -10px;
+        right: 30px;
+        border-radius: 50%;
+    }
+</style>
+<link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<nav id="myNav" class="navbar navbar-expand-lg navbar-light bg-light justify-content-between text-uppercase">
+    <img src="~/images/logo.png.png" style="max-height: 100px; margin-left: 15px;">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"  routerLinkActive="active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Products">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Customer/Adress/">Profile</a>
+                </li>
+
+            </ul>
+            <div style="margin-left:1200px">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                <button class="btn btn-outline-success" style="margin: 10px;" type="submit">Login</button>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row"> 
+       @RenderBody()
+    </div>
+
+</div>

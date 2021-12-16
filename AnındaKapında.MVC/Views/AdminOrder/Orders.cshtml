@@ -1,0 +1,59 @@
+﻿@model IEnumerable<AnındaKapında.MVC.Models.OrderResponseModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Order Information</h5>
+
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>Customer Name</th>
+                <th>Adress Id</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Delivery Date</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.AdressId</td>
+                    <td>@item.OrderDate.ToShortDateString()</td>
+                    <td>
+                        @if (item.ShipmentStatus == 1)
+                        {
+                            <i class="badge bg-danger">Waiting</i>
+                        }
+                        @if (item.ShipmentStatus == 2)
+                        {
+                            <i class="badge bg-warning">Getting Ready</i>
+                        }
+                        @if (item.ShipmentStatus == 3)
+                        {
+                            <i class="badge bg-success">Cargo</i>
+                        }
+                        @if (item.ShipmentStatus == 4)
+                        {
+                            <i class="badge bg-success">Delivered</i>
+                        }
+                    </td>
+                    <td>@item.DeliveryDate</td>
+                    <td>
+                        <a href="Orders/Lines/@item.Id" class="btn btn-outline-info btn-sm" >Order Details</a>
+                        <a href="Orders/Adress/@item.AdressId" class="btn btn-outline-warning btn-sm" >Show Adress</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

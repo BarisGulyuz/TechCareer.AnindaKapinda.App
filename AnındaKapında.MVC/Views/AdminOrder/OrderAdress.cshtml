@@ -1,0 +1,33 @@
+﻿@model AnındaKapında.MVC.Models.AdressResponseModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "OrderAdress";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Adress Information</h5>
+
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>Adress Title</th>
+                <th>City</th>
+                <th>Neighborhood</th>
+                <th>Description</th>
+                <th>Postcode</th>
+            </tr>
+
+                <tr>
+                    <td>@Model.Id</td>
+                    <td>@Model.AdressTitle.</td>
+                    <td>@Model.City</td>
+                    <td>@Model.Neighborhood</td>
+                    <td>@Model.AdressDescription</td>
+                    <td>@Model.PostCode</td>
+                </tr>
+        </table>
+    </div>
+</div>

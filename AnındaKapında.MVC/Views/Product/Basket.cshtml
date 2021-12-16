@@ -1,0 +1,44 @@
+﻿@model AnındaKapında.MVC.Models.BasketResponseModel
+@{
+    ViewData["Title"] = "Basket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    #myCart {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fafafa;
+        box-shadow: 0 2px 8px rgb(0, 0, 0, 0.3)
+    }
+</style>
+
+
+@*<p hidden class="text-center">@Model.Id</p>*@
+<div class="container" id="myCart">
+    <h3 class="text-center text-decoration-underline mt-3">Anında Kapında Shoppin Cart</h3>
+    <table class="table table-bordered mt-3">
+        <tr>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        @foreach (var item in Model.Items.ToList())
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+                <td>@(item.Quantity * item.Price)</td>
+            </tr>
+        }
+    </table>
+    <br />
+    <br />
+    <br />
+</div>
+
