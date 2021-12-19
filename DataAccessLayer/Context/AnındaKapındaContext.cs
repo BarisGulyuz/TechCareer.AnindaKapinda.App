@@ -15,10 +15,13 @@ namespace DataAccessLayer.Context
         public DbSet<Adress> Adresses { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderLine> OrderLines { get; set; }
-        //public AnındaKapındaContext(DbContextOptions<AnındaKapındaContext> options) : base(options)
-        //{
-            
-        //}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Worker>().ToTable("Workers");
+            modelBuilder.Entity<User>().ToTable("Users");
+            modelBuilder.Entity<Customer>().ToTable("Customers");
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server=DESKTOP-3JM41IE\\ERP; database=AnındaKapındaStoreDb; integrated security=true;");

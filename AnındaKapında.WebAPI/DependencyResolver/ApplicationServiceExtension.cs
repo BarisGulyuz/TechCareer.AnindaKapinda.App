@@ -32,7 +32,9 @@ namespace CoreLayer.DependencyResolver
             //ADRESS
             services.AddScoped<IAdressDal, EfAdressDal>();
             services.AddScoped<IAdressService, AdressManager>();
-
+            //WORKER
+            services.AddScoped<IWorkerDal, EfWorkerRepository>(); //EfWorkerDal
+            services.AddScoped<IWorkerService, WorkerManager>();
             return services;
         }
     }

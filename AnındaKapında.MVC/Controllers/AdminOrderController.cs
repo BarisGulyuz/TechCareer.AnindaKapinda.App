@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AnındaKapında.MVC.Controllers
@@ -54,23 +55,52 @@ namespace AnındaKapında.MVC.Controllers
             }
         }
 
-            [Route("Orders/Adress/{id}")]
-            public async Task<IActionResult> OrderAdress(int id)
-            {
-                var client = _httpClientFactory.CreateClient();
-                var responseMessage = await client.GetAsync("http://localhost:16231/api/Adress/" + id);
+        [Route("Orders/Adress/{id}")]
+        public async Task<IActionResult> OrderAdress(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("http://localhost:16231/api/Adress/" + id);
 
-                if (responseMessage.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<AdressResponseModel>(jsonData);
-                    return View(result);
-                }
-                else
-                {
-                    return View(null);
-                }
+            if (responseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<AdressResponseModel>(jsonData);
+                return View(result);
+            }
+            else
+            {
+                return View(null);
             }
         }
+
+        [Route("Orders/Update/{id}")]
+        public IActionResult OrderUpdate(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+
+        [Route("Orders/Update/{id}")]
+        [HttpPost]
+        public async Task<IActionResult> OrderUpdate(OrderUpdateResponeModel model)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(model);
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PutAsync("http://localhost:16231/api/Order", content);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Orders");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
+
     }
+
+
+}
 

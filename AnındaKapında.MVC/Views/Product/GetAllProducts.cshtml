@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AnındaKapında.MVC.Models.ProductResponseModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "GetAllProducts";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Products Information</h5>
+        <a href="/Products/Add"  class="btn btn-success mb-3 float-right">Add New Product</a>
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Discounted Price</th>
+                <th>Description</th>
+                <th></th>
+
+            </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.Id</td>
+                    <td><img src="@item.ImageUrl" height="50"/></td>
+                    <td>@item.CategoryId</td>
+                    <td>@item.ProductName</td>
+                    <td>$ @item.Price</td>
+                    <td>$ @item.DiscountedPrice</td>
+                    <td>@item.ProductDescripton</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" href="">Details</a>
+                        <a onclick="return confirm('Wanna Delete This Product?')" href="/Product/Remove/@item.Id"  class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script src="~/jquery/jquery.min.js"></script>
+
+

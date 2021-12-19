@@ -1,6 +1,7 @@
 ﻿using AnındaKapında.WebAPI.Constans;
 using BusinessLayer.Abstract;
 using BusinessLayer.ErrorResponse;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -40,6 +41,22 @@ namespace AnındaKapında.WebAPI.Controllers
                 return NotFound(new ApiResponse(404, orderId, message: Messages.NotFound));
             }
             return Ok(value);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public IActionResult UpdateOrder(Order order)
+        {
+            var updatedValue = _orderService.GetById(order.Id);
+            order.AdressId = updatedValue.AdressId;
+            order.CustomerName = updatedValue.CustomerName;
+            order.OrderDate = updatedValue.OrderDate;
+            if (updatedValue == null)
+            {
+                return NotFound(new ApiResponse(404, order.Id, message: Messages.NotFound));
+            }
+            _orderService.Update(order);
+            return NoContent();
         }
     }
 }

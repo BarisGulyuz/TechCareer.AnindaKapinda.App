@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccessLayer.Context;
+using BusinessLayer.Enums;
 
 namespace AnındaKapında.WebAPI.Controllers
 {
@@ -50,6 +51,8 @@ namespace AnındaKapında.WebAPI.Controllers
         public async  Task<IActionResult> Checkout(string id, Order order)
         {
             AnındaKapındaContext context = new AnındaKapındaContext();
+            order.OrderDate = DateTime.Now;
+            order.ShipmentStatus = (int)ShipmentStatusEnum.Waiting;
             context.Orders.Add(order);
             context.SaveChanges();
             var basket = await _basketRepository.GetBasketAsync(id);

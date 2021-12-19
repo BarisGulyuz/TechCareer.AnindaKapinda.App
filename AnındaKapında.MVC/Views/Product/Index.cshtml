@@ -26,11 +26,6 @@
 
         </ul>
     </div>
-
-    @*<form action="/AddToCart?productName=Pizza?price=20" method="post">
-        <button>Tıkla</button>
-    </form>*@
-
 </section>
 <section class="col-9" style="margin-top:30px" id="allProducts">
     <div class="row" id="myCard">
@@ -42,11 +37,11 @@
 </section>
 <script src="~/jquery/jquery.min.js"></script>
 <script>
-        $(document).ready(function () {
-            $('#products-category').hide()
-            getCategories()
-            getProducts()
-        })
+    $(document).ready(function () {
+        $('#products-category').hide()
+        getCategories()
+        getProducts()
+    })
 
     function getCategories() {
         $.ajax({
@@ -81,8 +76,8 @@
                                  <br>
                                    <p></p>
                                  <div>
-                                  <button type="submit"  class="btn btn-sm btn-outline-success fa fa-shopping-cart"> Add To Cart</button>
-                                  <button type="button" class="btn btn-sm btn-outline-warning  fa fa-product-hunt" style="margin-left: 2px;"> View Product</button>
+                                  <a class="btn btn-sm btn-outline-success fa fa-shopping-cart"> Add To Cart</a>
+                                  <a href="/Product/Details/${value.id}" type="button" class="btn btn-sm btn-outline-warning  fa fa-product-hunt" style="margin-left: 2px;"> View Product</a>
                                 </div>
                             </div>`
                 })
@@ -111,7 +106,7 @@
                                    <p></p>
                                  <div>
                                   <button type="button"  class="btn btn-sm btn-outline-success fa fa-shopping-cart"> Add To Cart</button>
-                                  <button type="button" class="btn btn-sm btn-outline-warning  fa fa-product-hunt" style="margin-left: 2px;"> View Product</button>
+                                  <a href="/Product/Details/${value.id}" type="button" class="btn btn-sm btn-outline-warning  fa fa-product-hunt" style="margin-left: 2px;"> View Product</a>
                                 </div>
                             </div>`
                 })

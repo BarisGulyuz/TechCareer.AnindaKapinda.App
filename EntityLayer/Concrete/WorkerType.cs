@@ -8,7 +8,7 @@ namespace EntityLayer.Concrete
 {
      public  class WorkerType: BaseEntity
     {
-        public int Description { get; set; }
+        public string Description { get; set; }
         public ICollection<Worker> Workers { get; set; }
     }
 }

@@ -1,0 +1,41 @@
+﻿@model AnındaKapında.MVC.Models.ProductResponseModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Create" asp-controller="Product" method="post">
+            <div class="container mt-3">
+                <h5 class="card-title text-center">New Product Page</h5>
+                <label class="form-label">Product Name</label>
+                <input class="form-control mb-3" type="text" asp-for="ProductName" />
+
+                <label class="form-label">Category</label>
+                @*<input class="form-control" type="text" asp-for="CategoryId" />*@
+                <select class="form-select mb-3" asp-for="CategoryId">
+                    <option value="1">Foods</option>
+                    <option value="2">Drinks</option>
+                    <option value="3">Man's Clothes</option>
+                    <option value="4">Woman's Clothes</option>
+                </select>
+
+                <label class="form-label">Price</label>
+                <input class="form-control mb-3" asp-for="Price" />
+
+                <label class="form-label">Discounted Price</label>
+                <input class="form-control mb-3" asp-for="DiscountedPrice" />
+
+                <label class="form-label">Desription</label>
+                <textarea class="form-control mb-3" asp-for="ProductDescripton"> </textarea>
+
+                <button id="addProduct" class="btn btn-outline-success" onclick="return confirm('Wanna Add This Product?')" type="submit">Add Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

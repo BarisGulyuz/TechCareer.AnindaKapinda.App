@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AnındaKapında.MVC.Models.WorkerReponseModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "CargoOfficers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Cargo Officers Information</h5>
+        <a href="/CargoOfficer/Add" class="btn btn-success mb-3">Add New Worker</a>
+        <table class="table table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>PhoneNumber</th>
+                <th>Email</th>
+                <th>Birtdate</th>
+
+            </tr>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.SurName</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.Email </td>
+                    <td>@item.BirthDate.ToShortDateString()</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

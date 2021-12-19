@@ -49,11 +49,16 @@
                     </td>
                     <td>@item.DeliveryDate</td>
                     <td>
-                        <a href="Orders/Lines/@item.Id" class="btn btn-outline-info btn-sm" >Order Details</a>
-                        <a href="Orders/Adress/@item.AdressId" class="btn btn-outline-warning btn-sm" >Show Adress</a>
+                        <a href="Orders/Lines/@item.Id" class="btn btn-info btn-sm">Order Details</a>
+                        <a href="Orders/Adress/@item.AdressId" class="btn btn-warning btn-sm">Show Adress</a>
+                        <a href="Orders/Update/@item.Id" class="btn btn-success btn-sm">Update Status</a>
                     </td>
                 </tr>
             }
         </table>
     </div>
 </div>
+
+<script src="~/jquery/jquery.min.js"></script>
+
+

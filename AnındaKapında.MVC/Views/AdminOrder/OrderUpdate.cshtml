@@ -1,0 +1,33 @@
+﻿@model AnındaKapında.MVC.Models.OrderUpdateResponeModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+@{
+    ViewData["Title"] = "OrderUpdate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="OrderUpdate" asp-controller="AdminOrder" method="post">
+            <div class="container mt-3">
+                <h5 class="card-title text-center">New Cargo Officer Page</h5>
+                <input class="form-control mb-3" type="text"  asp-for="Id" value="@ViewBag.id" />
+
+                <label class="form-label">Shipment Status</label>
+                @*<input class="form-control mb-3" type="text" asp-for="ShipmentStatus"  value="@ViewBag.shipmentStatus"/>*@
+                <select asp-for="ShipmentStatus" class="form-select" > 
+                    <option value="1">Waiting</option>
+                    <option value="2">Getting Ready</option>
+                    <option value="3">Cargo</option>
+                    <option value="4">Delivered</option>
+                </select>
+
+                <label class="form-label">Delivery Date</label>
+                <input class="form-control mb-3" type="date" asp-for="DeliveryDate" />
+
+                <button class="btn btn-outline-success" onclick="return confirm('Wanna Update This Order')" type="submit">Update Order</button>
+            </div>
+        </form>
+    </div>
+</div>
+

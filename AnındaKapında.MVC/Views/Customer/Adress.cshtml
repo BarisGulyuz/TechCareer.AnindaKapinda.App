@@ -4,24 +4,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container">
-    <h3 class="text-center">Adress Infortmation</h3>
+<div class="container mt-5 mb-1">
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <button id="Adress-btn" type="button" class="btn btn-success">Adress</button>
+        <button id="Orders-btn" type="button" class="btn btn-primary">Orders</button>
+    </div>
 </div>
-<div class="container mt-5" id="adressData">
+<div class="container mt-2" id="adressData">
 
 </div>
+  <div id="Orders" class="alert alert-warning text-center container" role="alert">
+        There Is No Order Yet
+ </div>
+
 
 <script src="~/jquery/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
+        $('#adresData').hide()
+        $('#Orders').hide()
+    })
+    $('#Adress-btn').click(function () {
+        $('#Orders').hide(500)
         GetAdress()
+       
+    })
+    $('#Orders-btn').click(function () {
+        $('#Orders').toggle(500)
+        $('#adresData').hide(500)
     })
     function GetAdress() {
+        
         $.ajax({
             url: 'http://localhost:16231/api/Adress',
             type: 'GET',
             success: function (data) {
-                let table = `<button id="btn-addAdress" class="btn btn-success mb-3">Add New Adress</button>
+                let table = `
+                               <div class="container mt-5">
+                                    <h3 class="text-center">Adress Infortmation</h3>
+                                </div><button id="btn-addAdress" class="btn btn-success mb-3">Add New Adress</button>
                                  <table id="adressTable" class="table table-bordered table-hover">
                                  <tr>
                                     <th>#</th>
@@ -42,6 +63,7 @@
                 })
                 table += '</table>'
                 $('#adressData').html(table)
+                $('#adresData').fadeToggle(500)
             }
         })
     }
